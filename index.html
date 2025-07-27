@@ -1521,15 +1521,20 @@
         }
 
         .category-icon {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 8px;
-            color: green;
-            font-size: 1.2rem;
+            overflow: hidden;
+        }
+
+        .category-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .category-name {
@@ -3404,8 +3409,8 @@
                     allCategoryCard.className = 'category-card active';
                     allCategoryCard.dataset.category = 'all';
                     allCategoryCard.innerHTML = `
-                        <div class="category-icon" style="background: var(--accent-color);">
-                            <i class="fas fa-boxes"></i>
+                        <div class="category-icon">
+                            <img src="https://i.postimg.cc/DwFT5ZFk/IMG-0852.jpg=Todos" alt="Todos los productos">
                         </div>
                         <div class="category-name">Todos</div>
                     `;
@@ -3428,7 +3433,7 @@
                         categoryCard.dataset.category = category.id;
                         categoryCard.innerHTML = `
                             <div class="category-icon">
-                                <i class="fas ${category.icon || 'fa-box'}"></i>
+                                <img src="${category.image || 'https://via.placeholder.com/60x60/10B981/FFFFFF?text=' + category.name.charAt(0)}" alt="${category.name}">
                             </div>
                             <div class="category-name">${category.name}</div>
                         `;
@@ -3768,6 +3773,14 @@
             });
 
             // Auth event listeners
+            elements.userAvatar.addEventListener('click', () => {
+                if (currentUser) {
+                    openProfileModal();
+                } else {
+                    openAuthModal();
+                }
+            });
+
             elements.authModalClose.addEventListener('click', closeAuthModal);
             elements.authModal.addEventListener('click', (e) => {
                 if (e.target === elements.authModal) {
