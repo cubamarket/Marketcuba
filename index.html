@@ -782,10 +782,10 @@
             font-weight: 500;
         }
         
-        .telegram-btn {
-            background: var(--accent-color);
+        .whatsapp-btn {
+            background: #25D366;
             color: white;
-            border: 1px solid var(--accent-color);
+            border: 1px solid #25D366;
             border-radius: 5px;
             padding: 6px 8px;
             font-size: 0.7rem;
@@ -796,8 +796,8 @@
             transition: var(--transition);
         }
         
-        .telegram-btn:hover {
-            background: var(--primary-dark);
+        .whatsapp-btn:hover {
+            background: #128C7E;
             transform: translateY(-2px);
         }
         
@@ -982,6 +982,7 @@
         }
         
         .image-modal-btn {
+            position: relative;
             background-color: var(--accent-color);
             color: white;
             border: none;
@@ -994,7 +995,8 @@
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
+            overflow: hidden;
         }
         
         .image-modal-btn:hover {
@@ -1085,8 +1087,8 @@
             }
         }
 
-        /* Seller Telegram */
-        .seller-telegram {
+        /* Seller WhatsApp */
+        .seller-whatsapp {
             margin-top: 8px;
             font-size: 0.8rem;
             color: var(--text-light);
@@ -1095,20 +1097,20 @@
             gap: 5px;
         }
 
-        .seller-telegram a {
-            color: #0088cc;
+        .seller-whatsapp a {
+            color: #25D366;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 3px;
         }
 
-        .seller-telegram a:hover {
+        .seller-whatsapp a:hover {
             text-decoration: underline;
         }
 
-        .seller-telegram i {
-            color: #0088cc;
+        .seller-whatsapp i {
+            color: #25D366;
         }
 
         /* Seller Button */
@@ -1394,7 +1396,7 @@
 
         .bag-checkout-btn {
             flex: 2;
-            background: var(--accent-color);
+            background: #25D366;
             color: white;
             border: none;
             border-radius: 5px;
@@ -1409,7 +1411,7 @@
         }
 
         .bag-checkout-btn:hover {
-            background: var(--primary-dark);
+            background: #128C7E;
         }
 
         .bag-checkout-btn i {
@@ -1521,13 +1523,12 @@
         .category-icon {
             width: 40px;
             height: 40px;
-            background: var(--primary-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 8px;
-            color: white;
+            color: green;
             font-size: 1.2rem;
         }
 
@@ -2276,7 +2277,6 @@
         .profile-btn {
             padding: 10px;
             border-radius: 6px;
-            font-size: var(--font-size-medium);
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
@@ -2313,9 +2313,9 @@
         <div class="menu-categories" id="menu-categories">
             <div class="loading">Cargando categorías...</div>
         </div>
-        <a href="mailto:ocarmenate429@gmail.com" class="menu-category" id="support-menu-btn">
+        <a href="mailto:cubamarket712@gmail.com" class="menu-category" id="support-menu-btn">
             <i class="fas fa-envelope"></i>
-            <span>Soporte por Email</span>
+            <span>Soporte tecnico</span>
         </a>
         <div class="menu-category" id="seller-menu-btn">
             <i class="fas fa-store"></i>
@@ -2364,7 +2364,7 @@
             <option value="Camagüey">Camagüey</option>
             <option value="Las Tunas">Las Tunas</option>
             <option value="Holguín">Holguín</option>
-            <option value="Granma">Granma</option>
+            <option value="Granma">Granma</div>
             <option value="Santiago de Cuba">Santiago de Cuba</option>
             <option value="Guantánamo">Guantánamo</option>
             <option value="Isla de la Juventud">Isla de la Juventud</option>
@@ -2474,8 +2474,8 @@
                 <div class="bag-actions">
                     <button class="bag-clear-btn" id="bag-clear-btn">Vaciar bolsa</button>
                     <button class="bag-checkout-btn" id="bag-checkout-btn">
-                        <i class="fab fa-telegram"></i>
-                        Comprar por Telegram
+                        <i class="fab fa-whatsapp"></i>
+                        Comprar por WhatsApp
                     </button>
                 </div>
             </div>
@@ -2667,7 +2667,7 @@
         let categories = [];
         let currentSlide = 0;
         let slideInterval;
-        const telegramUsername = "tiendavende";
+        const whatsappNumber = "5355500000"; // Cambia esto por el número de WhatsApp del vendedor
         const sellerRegistrationUrl = "https://ecomercado.github.io/Vendedor-/";
         
         let shoppingBag = JSON.parse(localStorage.getItem('shoppingBag')) || [];
@@ -3208,13 +3208,12 @@
             }
 
             let sellerContactHtml = '';
-            if (product.telegram) {
-                const telegramUser = product.telegram.replace('@', '');
+            if (product.whatsapp) {
                 sellerContactHtml = `
-                    <div class="seller-telegram">
+                    <div class="seller-whatsapp">
                         <span>Vendedor:</span>
-                        <a href="https://t.me/${telegramUser}" target="_blank">
-                            <i class="fab fa-telegram"></i> @${telegramUser}
+                        <a href="https://wa.me/${product.whatsapp}" target="_blank">
+                            <i class="fab fa-whatsapp"></i> ${product.whatsapp}
                         </a>
                     </div>
                 `;
@@ -3240,7 +3239,7 @@
                         <button class="quantity-btn plus">+</button>
                     </div>
                     <button class="add-to-bag-btn"><i class="fas fa-shopping-bag" style="margin-right: 8px;"></i> Añadir a la bolsa</button>
-                    <button class="telegram-btn buy-now"><i class="fab fa-telegram" style="margin-right: 8px;"></i> Comprar ahora</button>
+                    <button class="whatsapp-btn buy-now"><i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Comprar ahora</button>
                 </div>
             `;
             
@@ -3501,7 +3500,7 @@
                     name: product.name,
                     price: product.price,
                     image: product.image,
-                    telegram: product.telegram,
+                    whatsapp: product.whatsapp,
                     quantity: quantity
                 });
             }
@@ -3637,7 +3636,7 @@
             const sellers = {};
             
             shoppingBag.forEach(item => {
-                const seller = item.telegram || telegramUsername;
+                const seller = item.whatsapp || whatsappNumber;
                 if (!sellers[seller]) {
                     sellers[seller] = [];
                 }
@@ -3660,8 +3659,7 @@
                 message += `Total: CUP ${total.toFixed(2)}\n\n`;
                 message += `¿Podrías ayudarme con esta compra?`;
 
-                const telegramUser = seller.replace('@', '');
-                window.open(`https://t.me/${telegramUser}?text=${encodeURIComponent(message)}`, '_blank');
+                window.open(`https://wa.me/${seller}?text=${encodeURIComponent(message)}`, '_blank');
             }
 
             clearBag();
@@ -3703,7 +3701,7 @@
                     const product = products.find(p => p.id === productId);
                     if (product) {
                         const message = `Mira este producto: ${product.name} - CUP ${product.price.toFixed(2)}`;
-                        window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
+                        window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
                     }
                 }
             });
@@ -3895,7 +3893,7 @@
             const quantity = parseInt(productElement.querySelector('.quantity').textContent);
             
             if (product) {
-                if (!product.telegram) {
+                if (!product.whatsapp) {
                     showConfirmationDialog('Atención', 'Este producto no tiene un vendedor asignado. Por favor contacte al soporte.');
                     const message = `¡Hola! Estoy interesado en comprar:\n\n` +
                                    `- ${product.name}\n` +
@@ -3903,11 +3901,10 @@
                                    `Precio unitario: CUP ${product.price.toFixed(2)}\n` +
                                    `Total: CUP ${(product.price * quantity).toFixed(2)}\n\n` +
                                    `Este producto no tiene vendedor asignado. ¿Podrían ayudarme?`;
-                    window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
+                    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
                     return;
                 }
                 
-                const telegramUser = product.telegram.replace('@', '');
                 const message = `¡Hola! Estoy interesado en comprar:\n\n` +
                                `- ${product.name}\n` +
                                `Cantidad: ${quantity}\n` +
@@ -3915,7 +3912,7 @@
                                `Total: CUP ${(product.price * quantity).toFixed(2)}\n\n` +
                                `¿Podrías ayudarme con esta compra?`;
                 
-                window.open(`https://t.me/${telegramUser}?text=${encodeURIComponent(message)}`, '_blank');
+                window.open(`https://wa.me/${product.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
             }
         }
 
@@ -4078,7 +4075,7 @@
 
         function setupRippleEffect() {
             document.addEventListener('click', function(e) {
-                const target = e.target.closest('.telegram-btn, .quantity-btn, .menu-toggle, .search-toggle, .seller-btn, .add-to-bag-btn, .category-card, .floating-nav-item');
+                const target = e.target.closest('.whatsapp-btn, .quantity-btn, .menu-toggle, .search-toggle, .seller-btn, .add-to-bag-btn, .category-card, .floating-nav-item');
                 if (target) {
                     const rect = target.getBoundingClientRect();
                     const x = e.clientX - rect.left;
