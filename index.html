@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-color: #10B981; /* Verde moderno */
-            --primary-dark: #059669; /* Tono más oscuro */
-            --primary-light: #6EE7B7; /* Tono más claro */
-            --primary-extra-light: #D1FAE5; /* Tono muy claro */
-            --accent-color: #10B981; /* Mismo que primary para consistencia */
-            --text-color: #1F2937; /* Gris oscuro para texto */
-            --text-light: #6B7280; /* Gris medio */
-            --bg-color: #ECFDF5; /* Fondo verde muy claro */
+            --primary-color: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #6EE7B7;
+            --primary-extra-light: #D1FAE5;
+            --accent-color: #10B981;
+            --text-color: #1F2937;
+            --text-light: #6B7280;
+            --bg-color: #ECFDF5;
             --card-bg: #FFFFFF;
             --header-bg: #FFFFFF;
             --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            --shadow-green: 0 4px 20px rgba(16, 185, 129, 0.2); /* Sombra verde */
+            --shadow-green: 0 4px 20px rgba(16, 185, 129, 0.2);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             --font-size-small: 0.8rem;
             --font-size-medium: 0.9rem;
@@ -32,8 +32,12 @@
             --warning-color: #F59E0B;
             --error-color: #EF4444;
             --info-color: #3B82F6;
-            --blur-effect: blur(8px); /* Efecto blur */
-            --blur-bg: rgba(255, 255, 255, 0.8); /* Fondo para elementos con blur */
+            --blur-effect: blur(8px);
+            --blur-bg: rgba(255, 255, 255, 0.8);
+            --usd-color: #3B82F6;
+            --telegram-color: #0088cc;
+            --logo-primary: #10B981;
+            --logo-secondary: #1F2937;
         }
         
         * {
@@ -68,8 +72,8 @@
             align-items: center;
             box-shadow: var(--shadow);
             border-bottom: 1px solid var(--border-color);
-            backdrop-filter: var(--blur-effect); /* Efecto blur en el header */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .header-left {
@@ -78,16 +82,24 @@
             gap: 10px;
         }
         
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+        
         .logo-text {
             font-weight: 700;
             font-size: 1rem;
-            color: var(--primary-color);
+            color: var(--logo-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         
         .menu-toggle {
@@ -144,6 +156,34 @@
         .user-avatar:hover {
             transform: scale(1.1);
         }
+
+        .currency-selector {
+            display: flex;
+            align-items: center;
+            background: var(--primary-extra-light);
+            border-radius: 20px;
+            padding: 2px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .currency-option {
+            padding: 4px 10px;
+            font-size: var(--font-size-small);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .currency-option.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .currency-option:not(.active):hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
         
         .banner-slider {
             position: relative;
@@ -199,7 +239,7 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
         
         .banner-prev:hover, .banner-next:hover {
@@ -233,7 +273,7 @@
             background-color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: var(--transition);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
         
         .banner-dot.active {
@@ -243,16 +283,12 @@
         .location-selector {
             padding: 15px;
             background: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 50px;
-            z-index: 99;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--primary-color);
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .location-selector select {
@@ -291,7 +327,7 @@
             margin-left: 8px;
             display: none;
             box-shadow: var(--shadow-green);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
         
         .location-badge.show {
@@ -309,8 +345,8 @@
             z-index: 300;
             transition: left 0.3s ease-out;
             overflow-y: auto;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .side-menu.open {
@@ -328,8 +364,8 @@
             top: 0;
             z-index: 1;
             border-bottom: 1px solid var(--border-color);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .close-menu {
@@ -376,6 +412,32 @@
             text-align: center;
             color: var(--primary-color);
         }
+
+        .telegram-channel {
+            background-color: var(--telegram-color);
+            color: white;
+        }
+
+        .telegram-channel i {
+            color: white;
+        }
+
+        .telegram-channel:hover {
+            background-color: #0077b5;
+        }
+
+        .telegram-support {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .telegram-support i {
+            color: white;
+        }
+
+        .telegram-support:hover {
+            background-color: var(--primary-dark);
+        }
         
         .search-bar {
             display: none;
@@ -388,8 +450,8 @@
             z-index: 400;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
             border-bottom: 1px solid var(--border-color);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .search-bar.active {
@@ -464,8 +526,8 @@
             z-index: 399;
             overflow-y: auto;
             padding: 12px;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .search-results.active {
@@ -480,8 +542,8 @@
             display: flex;
             align-items: center;
             transition: var(--transition);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .search-result-item:hover {
@@ -546,10 +608,9 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             background: linear-gradient(90deg, var(--header-bg), #f5f5f5);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
         
-        /* Product Grid - Modified for compact layout */
         .product-list {
             padding: 8px 4px;
             display: grid;
@@ -596,7 +657,7 @@
         
         .product-image {
             width: 100%;
-            height: 100px;
+            height: 150px;
             object-fit: contain;
             margin-bottom: 6px;
             border-radius: 4px;
@@ -641,87 +702,47 @@
             color: var(--text-color);
         }
         
-        .product-details {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            margin-bottom: 8px;
-            line-height: 1.4;
-            max-height: 60px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .product-details.expanded {
-            max-height: none;
-        }
-        
-        .product-details::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), var(--card-bg));
-            display: none;
-        }
-        
-        .product-details:not(.expanded)::after {
-            display: block;
-        }
-        
-        .read-more {
-            color: var(--primary-color);
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: inline-block;
-            margin-top: 4px;
-            font-weight: 500;
-        }
-        
-        .read-more:hover {
-            text-decoration: underline;
+        .product-price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
         }
         
         .product-price {
-            display: flex;
-            align-items: center;
-            margin-bottom: 4px;
-        }
-        
-        .current-price {
             font-weight: 700;
             font-size: 0.9rem;
             color: #EF4444;
         }
-        
-        .old-price {
-            font-size: 0.7rem;
-            color: #777;
-            text-decoration: line-through;
-            margin-left: 4px;
+
+        .product-price.usd {
+            color: var(--usd-color);
         }
         
         .product-stock {
             font-size: 0.7rem;
             color: var(--primary-color);
-            margin-top: 2px;
+            background: var(--primary-extra-light);
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+        
+        .product-details {
+            display: none;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
         
         .product-features {
+            display: none;
             margin-top: 8px;
             font-size: 0.8rem;
             color: var(--text-light);
-            display: none;
-        }
-        
-        .product-features.show {
-            display: block;
         }
         
         .product-features ul {
-            max-height: 150px;
-            overflow-y: auto;
             padding-left: 15px;
         }
         
@@ -729,25 +750,11 @@
             margin-bottom: 4px;
         }
         
-        .toggle-features {
-            color: var(--primary-color);
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-top: 4px;
-            display: inline-block;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-        
-        .toggle-features:hover {
-            text-decoration: underline;
-        }
-        
-        .product-purchase {
-            margin-top: 12px;
+        .product-purchase-buttons {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
+            margin-top: 8px;
         }
         
         .quantity-selector {
@@ -801,6 +808,25 @@
             transform: translateY(-2px);
         }
         
+        .add-to-bag-btn {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 6px 8px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .add-to-bag-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
         .banner {
             background: var(--header-bg);
             color: var(--primary-color);
@@ -809,8 +835,8 @@
             margin-bottom: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border-bottom: 1px solid var(--primary-color);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .banner h2 {
@@ -824,7 +850,6 @@
             font-size: 0.8rem;
         }
         
-        /* Floating Navigation - Modified to remove offers button */
         .floating-nav {
             position: fixed;
             bottom: 20px;
@@ -837,8 +862,8 @@
             display: flex;
             z-index: 200;
             border: 1px solid var(--border-color);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
         
         .floating-nav-item {
@@ -894,7 +919,7 @@
             transition: var(--transition);
             pointer-events: none;
             white-space: nowrap;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
         
         .floating-nav-item:hover .tooltip {
@@ -902,7 +927,6 @@
             top: -35px;
         }
         
-        /* 3D Icons */
         .icon-3d {
             position: relative;
             display: inline-block;
@@ -920,7 +944,6 @@
             transform: rotateY(15deg) rotateX(15deg);
         }
         
-        /* Image Modal */
         .image-modal {
             display: none;
             position: fixed;
@@ -934,7 +957,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
         
         .image-modal.show {
@@ -1024,7 +1047,7 @@
             animation: pulse 2s infinite;
             border: 1px solid var(--primary-dark);
             text-decoration: none;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
         
         @keyframes pulse {
@@ -1087,7 +1110,6 @@
             }
         }
 
-        /* Seller WhatsApp */
         .seller-whatsapp {
             margin-top: 8px;
             font-size: 0.8rem;
@@ -1113,7 +1135,6 @@
             color: #25D366;
         }
 
-        /* Seller Button */
         .seller-btn-container {
             display: flex;
             justify-content: center;
@@ -1134,7 +1155,7 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
 
         .seller-btn:hover {
@@ -1147,7 +1168,6 @@
             font-size: 1.1rem;
         }
 
-        /* Shopping Bag */
         .bag-btn {
             position: fixed;
             bottom: 60px;
@@ -1166,7 +1186,7 @@
             cursor: pointer;
             transition: var(--transition);
             border: 1px solid var(--primary-color);
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
 
         .bag-btn:hover {
@@ -1191,7 +1211,6 @@
             font-weight: bold;
         }
 
-        /* Bag Modal */
         .bag-modal {
             display: none;
             position: fixed;
@@ -1205,7 +1224,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
 
         .bag-modal.show {
@@ -1291,6 +1310,7 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 100%;
         }
 
         .bag-item-price {
@@ -1414,38 +1434,6 @@
             background: #128C7E;
         }
 
-        .bag-checkout-btn i {
-            font-size: 1.1rem;
-        }
-
-        .add-to-bag-btn {
-            background: var(--primary-color);
-            color: white;
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
-            padding: 6px 8px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            margin-top: 8px;
-        }
-
-        .add-to-bag-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .product-purchase-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 8px;
-        }
-
-        /* Categories */
         .categories-container {
             padding: 15px;
             background: var(--bg-color);
@@ -1549,7 +1537,6 @@
             width: 100%;
         }
 
-        /* View All Categories */
         .view-all-categories {
             grid-column: 1 / -1;
             background: var(--primary-light);
@@ -1580,7 +1567,6 @@
             font-weight: 500;
         }
 
-        /* Dialogs */
         .dialog-overlay {
             display: none;
             position: fixed;
@@ -1594,7 +1580,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
 
         .dialog-overlay.show {
@@ -1611,8 +1597,8 @@
             transform: scale(0.9);
             transition: all 0.3s ease;
             overflow: hidden;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
-            background-color: var(--blur-bg); /* Fondo semi-transparente */
+            backdrop-filter: var(--blur-effect);
+            background-color: var(--blur-bg);
         }
 
         .dialog-overlay.show .dialog {
@@ -1666,7 +1652,7 @@
             cursor: pointer;
             transition: var(--transition);
             border: none;
-            backdrop-filter: var(--blur-effect); /* Efecto blur */
+            backdrop-filter: var(--blur-effect);
         }
 
         .dialog-btn-primary {
@@ -1687,7 +1673,6 @@
             background-color: #e0e0e0;
         }
 
-        /* Municipality Selector */
         .municipality-selector {
             margin-top: 15px;
         }
@@ -1716,7 +1701,6 @@
             box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
         }
 
-        /* Confirmation Message */
         .confirmation-message {
             display: flex;
             flex-direction: column;
@@ -1744,7 +1728,125 @@
             margin-bottom: 20px;
         }
 
-        /* Comments Section */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: var(--blur-effect);
+        }
+
+        .product-modal.show {
+            opacity: 1;
+            display: flex;
+        }
+
+        .product-modal-content {
+            background: var(--bg-color);
+            width: 95%;
+            max-width: 500px;
+            max-height: 90vh;
+            border-radius: 10px;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-modal.show .product-modal-content {
+            transform: scale(1);
+        }
+
+        .product-modal-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-modal-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .product-modal-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .product-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .product-modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .product-modal-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #f5f5f5;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-modal-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .product-modal-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #EF4444;
+            margin-bottom: 15px;
+        }
+
+        .product-modal-description {
+            font-size: var(--font-size-medium);
+            color: var(--text-color);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .product-modal-features {
+            margin-bottom: 20px;
+        }
+
+        .product-modal-features-title {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .product-modal-features-list {
+            padding-left: 20px;
+        }
+
+        .product-modal-features-list li {
+            margin-bottom: 5px;
+        }
+
         .comments-section {
             margin-top: 20px;
             padding: 15px;
@@ -1869,127 +1971,6 @@
             transform: translateY(-2px);
         }
 
-        /* Product Details Modal */
-        .product-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.95);
-            z-index: 300;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            backdrop-filter: var(--blur-effect);
-        }
-
-        .product-modal.show {
-            opacity: 1;
-            display: flex;
-        }
-
-        .product-modal-content {
-            background: var(--bg-color);
-            width: 95%;
-            max-width: 500px;
-            max-height: 90vh;
-            border-radius: 10px;
-            overflow: hidden;
-            transform: scale(0.9);
-            transition: all 0.3s ease;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-modal.show .product-modal-content {
-            transform: scale(1);
-        }
-
-        .product-modal-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .product-modal-title {
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
-        .product-modal-close {
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .product-modal-close:hover {
-            transform: rotate(90deg);
-        }
-
-        .product-modal-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-        }
-
-        .product-modal-image {
-            width: 100%;
-            max-height: 200px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            background: #f5f5f5;
-            border: 1px solid var(--border-color);
-        }
-
-        .product-modal-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-color);
-        }
-
-        .product-modal-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #EF4444;
-            margin-bottom: 15px;
-        }
-
-        .product-modal-description {
-            font-size: var(--font-size-medium);
-            color: var(--text-color);
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .product-modal-features {
-            margin-bottom: 20px;
-        }
-
-        .product-modal-features-title {
-            font-size: var(--font-size-large);
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .product-modal-features-list {
-            padding-left: 20px;
-        }
-
-        .product-modal-features-list li {
-            margin-bottom: 5px;
-        }
-
-        /* Auth Modal */
         .auth-modal {
             display: none;
             position: fixed;
@@ -2168,7 +2149,6 @@
             text-decoration: underline;
         }
 
-        /* Profile Modal */
         .profile-modal {
             display: none;
             position: fixed;
@@ -2305,6 +2285,105 @@
         .profile-btn-secondary:hover {
             background: #e0e0e0;
         }
+
+        .password-reset-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: var(--blur-effect);
+        }
+
+        .password-reset-dialog.show {
+            opacity: 1;
+            display: flex;
+        }
+
+        .password-reset-dialog-content {
+            background: var(--bg-color);
+            width: 95%;
+            max-width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .password-reset-dialog.show .password-reset-dialog-content {
+            transform: scale(1);
+        }
+
+        .password-reset-dialog-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .password-reset-dialog-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .password-reset-dialog-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .password-reset-dialog-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .password-reset-dialog-body {
+            padding: 20px;
+        }
+
+        .password-reset-dialog-footer {
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .password-reset-dialog-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .password-reset-dialog-btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .password-reset-dialog-btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .password-reset-dialog-btn-secondary {
+            background-color: #f0f0f0;
+            color: var(--text-color);
+        }
+
+        .password-reset-dialog-btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -2318,9 +2397,17 @@
         <div class="menu-categories" id="menu-categories">
             <div class="loading">Cargando categorías...</div>
         </div>
+        <a href="https://t.me/cubamark" target="_blank" class="menu-category telegram-channel">
+            <i class="fab fa-telegram"></i>
+            <span>Canal de Telegram</span>
+        </a>
+        <a href="https://t.me/cubamark10" target="_blank" class="menu-category telegram-support">
+            <i class="fab fa-telegram"></i>
+            <span>Soporte en Telegram</span>
+        </a>
         <a href="mailto:cubamarket712@gmail.com" class="menu-category" id="support-menu-btn">
             <i class="fas fa-envelope"></i>
-            <span>Soporte tecnico</span>
+            <span>Soporte técnico</span>
         </a>
         <div class="menu-category" id="seller-menu-btn">
             <i class="fas fa-store"></i>
@@ -2333,9 +2420,16 @@
             <div class="menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
-            <div class="logo-text">MarketCUBA</div>
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/qvJDvgVw/IMG-0884.png" alt="Cubamark Logo" class="logo-img">
+                <div class="logo-text">cuba</div>
+            </div>
         </div>
         <div class="header-right">
+            <div class="currency-selector" id="currency-selector">
+                <div class="currency-option active" data-currency="cup">CUP</div>
+                <div class="currency-option" data-currency="usd">USD</div>
+            </div>
             <div class="search-toggle" id="search-toggle">
                 <i class="fas fa-search"></i>
             </div>
@@ -2356,7 +2450,7 @@
     
     <div class="location-selector">
         <select id="province-select">
-            <option value="">Selecciona tu provincia</option>
+            <option value=""> tu provincia</option>
             <option value="Pinar del Río">Pinar del Río</option>
             <option value="Artemisa">Artemisa</option>
             <option value="La Habana">La Habana</option>
@@ -2369,7 +2463,7 @@
             <option value="Camagüey">Camagüey</option>
             <option value="Las Tunas">Las Tunas</option>
             <option value="Holguín">Holguín</option>
-            <option value="Granma">Granma</div>
+            <option value="Granma">Granma</option>
             <option value="Santiago de Cuba">Santiago de Cuba</option>
             <option value="Guantánamo">Guantánamo</option>
             <option value="Isla de la Juventud">Isla de la Juventud</option>
@@ -2379,7 +2473,7 @@
     
     <div class="banner">
         <h2>VENTA DE PRODUCTOS TODO CUBA</h2>
-        <p>Los mejores precios y la mayor variedad de productos en toda Cuba. Envíos a todas las provincias.</p>
+        <p>Los mejores precios y la mayor variedad.</p>
     </div>
 
     <div class="categories-container">
@@ -2487,7 +2581,6 @@
         </div>
     </div>
 
-    <!-- Product Details Modal with Comments -->
     <div class="product-modal" id="product-modal">
         <div class="product-modal-content">
             <div class="product-modal-header">
@@ -2495,12 +2588,10 @@
                 <div class="product-modal-close" id="product-modal-close">&times;</div>
             </div>
             <div class="product-modal-body" id="product-modal-body">
-                <!-- Content will be dynamically loaded here -->
             </div>
         </div>
     </div>
 
-    <!-- Auth Modal -->
     <div class="auth-modal" id="auth-modal">
         <div class="auth-modal-content">
             <div class="auth-modal-header">
@@ -2559,7 +2650,6 @@
         </div>
     </div>
 
-    <!-- Profile Modal -->
     <div class="profile-modal" id="profile-modal">
         <div class="profile-modal-content">
             <div class="profile-modal-header">
@@ -2654,14 +2744,14 @@
     
     <script>
         const firebaseConfig = {
-            apiKey: "AIzaSyAS7sVsIYI1e0yMO-rMfSWun_1ZUvIshLE",
-            authDomain: "tiene-a.firebaseapp.com",
+            apiKey: "AIzaSyAH23m01o_Eg4Cuf9NSykHRBxu7CvQo_vc",
+            authDomain: "cuba-arn.firebaseapp.com",
             databaseURL: "https://tiene-a-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "tiene-a",
-            storageBucket: "tiene-a.firebasestorage.app",
-            messagingSenderId: "62596148568",
-            appId: "1:62596148568:web:8e5c65cd8116b28f2a492d",
-            measurementId: "G-6RTXY3SHPB"
+            projectId: "cuba-arn",
+            storageBucket: "cuba-arn.firebasestorage.app",
+            messagingSenderId: "607371019723",
+            appId: "1:607371019723:web:3116df3d83c20513bc224e",
+            measurementId: "G-C6FBKGH58C"
         };
         
         firebase.initializeApp(firebaseConfig);
@@ -2672,11 +2762,13 @@
         let categories = [];
         let currentSlide = 0;
         let slideInterval;
-        const whatsappNumber = "5355500000"; // Cambia esto por el número de WhatsApp del vendedor
+        const whatsappNumber = "5355500000";
         const sellerRegistrationUrl = "https://ecomercado.github.io/Vendedor-/";
         
         let shoppingBag = JSON.parse(localStorage.getItem('shoppingBag')) || [];
         let currentUser = null;
+        let currentCurrency = 'cup';
+        let exchangeRate = 390;
         
         const municipalitiesByProvince = {
             "Pinar del Río": ["Consolación del Sur", "Guane", "La Palma", "Los Palacios", "Mantua", "Minas de Matahambre", "Pinar del Río", "San Juan y Martínez", "San Luis", "Sandino", "Viñales"],
@@ -2749,7 +2841,6 @@
             productModal: document.getElementById('product-modal'),
             productModalBody: document.getElementById('product-modal-body'),
             productModalClose: document.getElementById('product-modal-close'),
-            // Auth elements
             userAvatar: document.getElementById('user-avatar'),
             authModal: document.getElementById('auth-modal'),
             authModalTitle: document.getElementById('auth-modal-title'),
@@ -2769,20 +2860,20 @@
             showRegister: document.getElementById('show-register'),
             showLogin: document.getElementById('show-login'),
             forgotPassword: document.getElementById('forgot-password'),
-            // Profile elements
             profileModal: document.getElementById('profile-modal'),
             profileModalClose: document.getElementById('profile-modal-close'),
             profileAvatar: document.getElementById('profile-avatar'),
             profileName: document.getElementById('profile-name'),
             profileEmail: document.getElementById('profile-email'),
             logoutBtn: document.getElementById('logout-btn'),
-            // Password reset elements
             passwordResetDialog: document.getElementById('password-reset-dialog'),
             resetEmail: document.getElementById('reset-email'),
             resetError: document.getElementById('reset-error'),
             passwordResetDialogClose: document.getElementById('password-reset-dialog-close'),
             passwordResetDialogCancel: document.getElementById('password-reset-dialog-cancel'),
-            passwordResetDialogConfirm: document.getElementById('password-reset-dialog-confirm')
+            passwordResetDialogConfirm: document.getElementById('password-reset-dialog-confirm'),
+            currencySelector: document.getElementById('currency-selector'),
+            currencyOptions: document.querySelectorAll('.currency-option')
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -2799,11 +2890,9 @@
         function initAuth() {
             auth.onAuthStateChanged(user => {
                 if (user) {
-                    // User is signed in
                     currentUser = user;
                     updateUserUI(user);
                 } else {
-                    // No user is signed in
                     currentUser = null;
                     updateUserUI(null);
                 }
@@ -2812,24 +2901,19 @@
 
         function updateUserUI(user) {
             if (user) {
-                // User is logged in
                 const displayName = user.displayName || 'Usuario';
                 const email = user.email;
                 const firstLetter = displayName.charAt(0).toUpperCase();
                 
-                // Update avatar in header
                 elements.userAvatar.innerHTML = firstLetter;
                 elements.userAvatar.title = `${displayName}\n${email}`;
                 
-                // Update profile modal
                 elements.profileName.textContent = displayName;
                 elements.profileEmail.textContent = email;
                 elements.profileAvatar.innerHTML = firstLetter;
                 
-                // Change avatar click to open profile
                 elements.userAvatar.onclick = openProfileModal;
             } else {
-                // User is not logged in
                 elements.userAvatar.innerHTML = '<i class="fas fa-user"></i>';
                 elements.userAvatar.title = 'Iniciar Sesión / Registrarse';
                 elements.userAvatar.onclick = openAuthModal;
@@ -2867,12 +2951,10 @@
         function handleLogin(email, password) {
             auth.signInWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    // Login successful
                     closeAuthModal();
                     showConfirmationDialog('Bienvenido', `Has iniciado sesión como ${userCredential.user.email}`);
                 })
                 .catch(error => {
-                    // Handle errors
                     let errorMessage = 'Error al iniciar sesión';
                     switch (error.code) {
                         case 'auth/user-not-found':
@@ -2902,17 +2984,14 @@
             
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    // Update user profile with display name
                     return userCredential.user.updateProfile({
                         displayName: name
                     });
                 })
                 .then(() => {
-                    // Registration successful
                     closeAuthModal();
                     showConfirmationDialog('Registro exitoso', `Bienvenido ${name}, tu cuenta ha sido creada con éxito`);
                     
-                    // Create user document in Firestore
                     return db.collection("users").doc(auth.currentUser.uid).set({
                         name: name,
                         email: email,
@@ -2921,7 +3000,6 @@
                     });
                 })
                 .catch(error => {
-                    // Handle errors
                     let errorMessage = 'Error al registrarse';
                     switch (error.code) {
                         case 'auth/email-already-in-use':
@@ -3076,6 +3154,19 @@
             }
         }
 
+        function showAllProducts() {
+            const productElements = document.querySelectorAll('.product-item');
+            productElements.forEach(element => {
+                element.style.display = 'flex';
+            });
+            
+            elements.provinceSelect.value = '';
+            elements.locationBadge.classList.remove('show');
+            localStorage.removeItem('selectedLocation');
+        }
+
+        window.showAllProducts = showAllProducts;
+
         function loadBanners() {
             db.collection("banners").where("active", "==", true).get()
                 .then(querySnapshot => {
@@ -3170,7 +3261,7 @@
                     products = [];
                     
                     if (querySnapshot.empty) {
-                        elements.productList.innerHTML = '<div class="empty">NO CUENTAS CON UNA CONEXION A INTERNET SEGURA,POR FAVOR CONETATE A UN VPN</div>';
+                        elements.productList.innerHTML = '<div class="empty"></div>';
                         return;
                     }
 
@@ -3201,17 +3292,11 @@
             if (product.features && product.features.length > 0) {
                 featuresHtml = `
                     <div class="product-features">
-                        <span class="toggle-features">Ver características ▼</span>
-                        <ul style="display: none;">${product.features.map(f => `<li>${f}</li>`).join('')}</ul>
+                        <ul>${product.features.map(f => `<li>${f}</li>`).join('')}</ul>
                     </div>
                 `;
             }
             
-            let oldPriceHtml = '';
-            if (product.oldPrice) {
-                oldPriceHtml = `<span class="old-price">CUP ${product.oldPrice.toFixed(2)}</span>`;
-            }
-
             let sellerContactHtml = '';
             if (product.whatsapp) {
                 sellerContactHtml = `
@@ -3228,13 +3313,11 @@
                 ${product.image ? `<img src="${product.image}" alt="${product.name}" class="product-image">` : ''}
                 <div class="product-brand">${product.brand || 'VENTA POR TODO CUBA'}</div>
                 <div class="product-name">${product.name}</div>
-                <div class="product-details">${product.description || defaultDescription}</div>
-                <span class="read-more">Ver más</span>
-                <div class="product-price">
-                    <span class="current-price">CUP ${product.price.toFixed(2)}</span>
-                    ${oldPriceHtml}
+                <div class="product-price-container">
+                    <span class="product-price">CUP ${product.price.toFixed(2)}</span>
+                    ${product.stock ? `<span class="product-stock">Stock ${product.stock}</span>` : ''}
                 </div>
-                ${product.stock ? `<div class="product-stock">◆ Stock ${product.stock}</div>` : ''}
+                <div class="product-details">${product.description || defaultDescription}</div>
                 ${sellerContactHtml}
                 ${featuresHtml}
                 <div class="product-purchase-buttons">
@@ -3248,7 +3331,6 @@
                 </div>
             `;
             
-            // Add click event to product image to show details modal
             const productImage = productElement.querySelector('.product-image');
             if (productImage) {
                 productImage.addEventListener('click', () => {
@@ -3256,7 +3338,6 @@
                 });
             }
             
-            // Add click event to product name to show details modal
             const productName = productElement.querySelector('.product-name');
             if (productName) {
                 productName.style.cursor = 'pointer';
@@ -3285,7 +3366,7 @@
                 ` : ''}
                 
                 <div class="comments-section">
-                    <h3 class="comments-title"><i class="fas fa-comments"></i> Comentarios</h3>
+                    <h3 class="comments-title"><i class="fas fa-comments"></i> Comenta este producto</h3>
                     <div class="comments-list" id="comments-list-${product.id}">
                         <div class="no-comments">No hay comentarios todavía. ¡Sé el primero en comentar!</div>
                     </div>
@@ -3296,10 +3377,8 @@
                 </div>
             `;
             
-            // Load comments for this product
             loadComments(product.id);
             
-            // Show the modal
             elements.productModal.style.display = 'flex';
             setTimeout(() => {
                 elements.productModal.classList.add('show');
@@ -3410,7 +3489,7 @@
                     allCategoryCard.dataset.category = 'all';
                     allCategoryCard.innerHTML = `
                         <div class="category-icon">
-                            <img src="https://i.postimg.cc/DwFT5ZFk/IMG-0852.jpg=Todos" alt="Todos los productos">
+                            <img src="https://i.postimg.cc/qvJDvgVw/IMG-0884.png" alt="Todos los productos">
                         </div>
                         <div class="category-name">Todos</div>
                     `;
@@ -3772,7 +3851,17 @@
                 elements.floatingCart.classList.add('active');
             });
 
-            // Auth event listeners
+            elements.currencyOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    if (!option.classList.contains('active')) {
+                        elements.currencyOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        currentCurrency = option.dataset.currency;
+                        updatePrices();
+                    }
+                });
+            });
+
             elements.userAvatar.addEventListener('click', () => {
                 if (currentUser) {
                     openProfileModal();
@@ -3834,7 +3923,6 @@
                 handleRegister(name, email, password);
             });
 
-            // Password reset event listeners
             elements.passwordResetDialogClose.addEventListener('click', closePasswordResetDialog);
             elements.passwordResetDialogCancel.addEventListener('click', closePasswordResetDialog);
             elements.passwordResetDialogConfirm.addEventListener('click', () => {
@@ -3844,7 +3932,6 @@
                 }
             });
 
-            // Profile event listeners
             elements.profileModalClose.addEventListener('click', closeProfileModal);
             elements.profileModal.addEventListener('click', (e) => {
                 if (e.target === elements.profileModal) {
@@ -3871,34 +3958,47 @@
                     handleQuantityChange(e, -1);
                 }
                 
-                if (e.target.classList.contains('toggle-features') || e.target.closest('.toggle-features')) {
-                    toggleFeatures(e);
-                }
-                
                 if (e.target.classList.contains('product-image') || e.target.closest('.product-image')) {
                     handleProductImageClick(e);
                 }
-                
-                if (e.target.classList.contains('read-more') || e.target.closest('.read-more')) {
-                    toggleDescription(e);
-                }
             });
         }
-        
-        function toggleDescription(e) {
-            const readMoreBtn = e.target.classList.contains('read-more') ? e.target : e.target.closest('.read-more');
-            const productElement = readMoreBtn.closest('.product-item');
-            const description = productElement.querySelector('.product-details');
+
+        function updatePrices() {
+            const productElements = document.querySelectorAll('.product-item');
             
-            description.classList.toggle('expanded');
+            productElements.forEach(element => {
+                const productId = element.dataset.id;
+                const product = products.find(p => p.id === productId);
+                if (!product) return;
+                
+                const priceElement = element.querySelector('.product-price');
+                
+                if (currentCurrency === 'usd') {
+                    const usdPrice = product.price / exchangeRate;
+                    priceElement.textContent = `USD ${usdPrice.toFixed(2)}`;
+                    priceElement.classList.add('usd');
+                } else {
+                    priceElement.textContent = `CUP ${product.price.toFixed(2)}`;
+                    priceElement.classList.remove('usd');
+                }
+            });
             
-            if (description.classList.contains('expanded')) {
-                readMoreBtn.textContent = 'Ver menos';
-            } else {
-                readMoreBtn.textContent = 'Ver más';
+            if (elements.bagModalFooter.style.display !== 'none') {
+                let total = 0;
+                shoppingBag.forEach(item => {
+                    total += item.price * item.quantity;
+                });
+                
+                if (currentCurrency === 'usd') {
+                    const usdTotal = total / exchangeRate;
+                    elements.bagTotalValue.textContent = `USD ${usdTotal.toFixed(2)}`;
+                } else {
+                    elements.bagTotalValue.textContent = `CUP ${total.toFixed(2)}`;
+                }
             }
         }
-
+        
         function handleBuyNowClick(e) {
             const productElement = e.target.closest('.product-item');
             const productId = productElement.dataset.id;
@@ -3954,16 +4054,6 @@
             if (newQuantity > 0) {
                 quantityElement.textContent = newQuantity;
             }
-        }
-
-        function toggleFeatures(e) {
-            const toggleElement = e.target.classList.contains('toggle-features') ? e.target : e.target.closest('.toggle-features');
-            const featuresContainer = toggleElement.closest('.product-features');
-            const ul = featuresContainer.querySelector('ul');
-            const isHidden = ul.style.display === 'none';
-            
-            ul.style.display = isHidden ? 'block' : 'none';
-            toggleElement.textContent = isHidden ? 'Ocultar características ▲' : 'Ver características ▼';
         }
 
         function handleProductImageClick(e) {
@@ -4107,22 +4197,6 @@
                 }
             });
         }
-
-        function showConfirmationDialog(title, message) {
-            elements.confirmationText.textContent = message;
-            elements.confirmationDialog.classList.add('show');
-        }
-
-        window.showAllProducts = function() {
-            const productElements = document.querySelectorAll('.product-item');
-            productElements.forEach(element => {
-                element.style.display = 'flex';
-            });
-            
-            elements.provinceSelect.value = '';
-            elements.locationBadge.classList.remove('show');
-            localStorage.removeItem('selectedLocation');
-        };
     </script>
 </body>
 </html>
